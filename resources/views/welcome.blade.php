@@ -1,16 +1,29 @@
-<!DOCTYPE html>
+
+  <!DOCTYPE html>
+
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Lets-Share</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
         <style>
+					.carousel-inner img {
+										  width: 100%; /* Set width to 100% */
+										  margin: auto;
+										  min-height:200px;
+									    }
+
+			  /* Hide the carousel text when the screen is less than 600 pixels wide */
+			  @media (max-width: 600px) {
+										.carousel-caption {
+										  display: none; 
+										}
             html, body {
                 background-color: #fff;
                 color: #636b6f;
@@ -64,6 +77,10 @@
         </style>
     </head>
     <body>
+	
+
+
+
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">

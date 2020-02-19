@@ -24,7 +24,7 @@ $flights = DB::table('orders')
                                 @csrf
                                 <input type="hidden" name="order_id" value="{{$id}}">
                                 <input type="hidden" name="to_user_id" value="{{$flights->owner_id}}">
-                                <textarea class="input" placeholder="Your Review" name="rate_details"></textarea>
+                                <textarea class="input" placeholder="Your Review" name="rate_details" required></textarea>
                                 <div class="input-rating">
                                     <span>Your Rating: </span>
                                     <div class="stars">

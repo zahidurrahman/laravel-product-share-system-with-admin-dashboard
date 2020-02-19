@@ -100,7 +100,7 @@
 											Home Accessories
 									@endif
 									@if($share->product_catagory=='2')
-											Electronies
+											Electronics
 									@endif
 									@if($share->product_catagory=='3')
 											Others
@@ -385,7 +385,7 @@
 										<!-- Review Form -->
 										<div class="col-md-3">
 											<div id="review-form">
-												<form class="review-form">
+												<!-- <form class="review-form">
 													<input class="input" type="text" placeholder="Your Name">
 													<input class="input" type="email" placeholder="Your Email">
 													<textarea class="input" placeholder="Your Review"></textarea>
@@ -400,7 +400,7 @@
 														</div>
 													</div>
 													<button class="primary-btn">Submit</button>
-												</form>
+												</form> -->
 											</div>
 										</div>
 										<!-- /Review Form -->

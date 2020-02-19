@@ -5,7 +5,7 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">
-                        <a href="/product_list"><i class="fas fa-arrow-left" style="margin-right: 10px"></i>Dashboard</a>
+                        <a href="/home"><button class="btn btn-warning"><i class="fa fa-arrow-left" ></i>&nbsp;Dashboard</button></a>
                         @foreach ($errors->all() as $error)
                             <li style="float:right;color:red;">{{ $error }}</li>
                         @endforeach
@@ -23,7 +23,7 @@
                             @csrf
                              <input type="hidden" name="product_id" value="{{ $userdata->id }}">
                             <div class="form-group">
-                                <label for="exampleFormControlSelect1">Catagory</label>
+                                <label for="exampleFormControlSelect1">Category</label>
                                 <select class="form-control"name="product_catagory" id="first" required>
                                   <option  selected value="{{$userdata->product_catagory}}">
                                     @if($userdata->product_catagory=='1')

@@ -9,6 +9,30 @@
                         <a href="/home"><button class="btn btn-warning"><i class="fa fa-arrow-left" ></i>&nbsp;Dashboard</button></a>
                     </div>
 
+					
+					<div class="search_box" style="margin-top:10px">
+					<center>
+						<form action="" id="form2">
+							<div>
+								<input type="text" id="search">
+								<input type="button" id="submit_form" onclick="checkInput()" value="Submit">
+							</div>
+						</form>
+						</center>
+					</div>
+
+					<!--END SEARCH BOX -->
+					<script>
+					//Displays #notFound
+			
+						function checkInput() {
+							var query = document.getElementById('search').value;
+							window.find(query);
+							return true;
+						}
+					</script>
+
+
                     <div class="card-body">
                       @if (session('status'))
                           <div class="alert alert-success" role="alert">

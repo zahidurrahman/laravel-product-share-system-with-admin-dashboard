@@ -72,8 +72,8 @@ class ProductController extends Controller
     {
       $request->validate([
 
-         'cover_image' => 'required|image|mimes:png,jpg',
-         'other_image' => 'required|image|mimes:png,jpg',
+         'cover_image' => 'required| mimes:jpeg,jpg,png',
+         'other_image' => 'required| mimes:jpeg,jpg,png',
 
      ]);
 
@@ -144,7 +144,8 @@ class ProductController extends Controller
                 File::delete($image_name);
 
                 $request->validate([
-                   'cover_image' => 'required|image|mimes:png,jpg',
+                     'cover_image' => 'required| mimes:jpeg,jpg,png',
+
                ]);
 
                if ($file = $request->file('cover_image')){
@@ -162,7 +163,7 @@ class ProductController extends Controller
                 $file_name='other_image/'.$file_name;
                 File::delete($file_name);
                 $request->validate([
-                   'other_image' => 'required|image|mimes:png,jpg',
+                     'other_image' => 'required| mimes:jpeg,jpg,png',
                ]);
 
                if ($r_file = $request->file('other_image')){

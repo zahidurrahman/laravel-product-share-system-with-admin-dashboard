@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="/home"><i class="fas fa-arrow-left" style="margin-right: 10px"></i>Dashboard</a>
+                        <a href="/home"><button class="btn btn-warning"><i class="fa fa-arrow-left" ></i>&nbsp;Dashboard</button></a>
                         @foreach ($errors->all() as $error)
                             <li style="float:right;color:red;">{{ $error }}</li>
                         @endforeach
@@ -31,11 +31,31 @@
                             }
 
                             ?>
+							
+							       <div class="search_box">
+    <form action="" id="form2">
+        <div>
+            <input type="text" id="search">
+            <input class="btn btn-warning" type="button" id="submit_form" onclick="checkInput()" value="Submit">
+        </div>
+    </form>
+</div>
+
+<!--END SEARCH BOX -->
+<script>
+    function checkInput() {
+        var query = document.getElementById('search').value;
+        window.find(query);
+        return true;
+    }
+</script>
+
+
                             <table class="table">
                                 <thead>
                                 <tr>
-                                    <th scope="col">NO</th>
-                                    <th scope="col">Product Cataogry</th>
+                                    <th scope="col">Product ID</th>
+                                    <th scope="col">Product Category</th>
                                     <th scope="col">Product Name</th>
                                     <th scope="col">Description</th>
                                     <th scope="col">Borrowing Duration</th>
@@ -48,13 +68,13 @@
                                   <?php $i=1;?>
                                   @foreach($flights as $share)
                                         <tr>
-                                            <td>{{$i}}</td>
+                                            <td>{{$share->id}}</td>
                                             <td>
                                               @if($share->product_catagory=='1')
                                                   Home Accessories
                                               @endif
                                               @if($share->product_catagory=='2')
-                                                  Electronies
+                                                  Electronics
                                               @endif
                                               @if($share->product_catagory=='3')
                                                   Others
@@ -109,11 +129,11 @@
                                         @csrf
 
                                         <div class="form-group">
-                                            <label for="exampleFormControlSelect1">Catagory</label>
+                                            <label for="exampleFormControlSelect1">Category</label>
                                             <select class="form-control"name="product_catagory" id="first" required>
                                                 <option disabled selected value="">--Select--</option>
                                                 <option value="1">Home Accessories</option>
-                                                <option value="2">Electronies</option>
+                                                <option value="2">Electronics</option>
                                                 <option value="3">Others</option>
                                             </select>
                                         </div>

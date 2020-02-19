@@ -69,7 +69,7 @@
                       <i class="fa fa-star-o"></i>
                     </div>
                     <div class="product-btns">
-                        <button class="quick-view"><a href="{{'/single?id='.$share->id}}"><i class="fa fa-eye"></i><span class="tooltipp">quick view</span></a></button>
+                        <button class="quick-view"><a href="{{'/single?id='.$share->id}}"><i class="fa fa-eye"></i><span class="tooltipp">Quick view</span></a></button>
                     </div>
                   </div>
                   <div class="add-to-cart">
@@ -87,6 +87,7 @@
         </div>
       </div>
       <!-- Products tab & slick -->
+</div>
 
     </div>
     <!-- /row -->

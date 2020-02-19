@@ -5,11 +5,36 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="/home"><i class="fas fa-arrow-left" style="margin-right: 10px"></i>Dashboard</a>
+                        <a href="/home"><button class="btn btn-warning"><i class="fa fa-arrow-left" ></i>&nbsp;Dashboard</button></a>
                         @foreach ($errors->all() as $error)
                             <li style="float:right;color:red;">{{ $error }}</li>
                         @endforeach
                     </div>
+					
+					
+						
+					<div class="search_box" style="margin-top:10px">
+					<center>
+						<form action="" id="form2">
+							<div>
+								<input type="text" id="search">
+								<input class="btn btn-warning" type="button" id="submit_form" onclick="checkInput()" value="Submit">
+							</div>
+						</form>
+						</center>
+					</div>
+
+					<!--END SEARCH BOX -->
+					<script>
+						function checkInput() {
+							var query = document.getElementById('search').value;
+							window.find(query);
+							return true;
+						}
+					</script>
+
+
+
 
                     <div class="card-body">
                         @if (session('status'))
@@ -22,22 +47,34 @@
 
                         <?php
                         $Id = Auth::id();
-                        $flights = DB::table('orders')
-                            ->join('products', 'orders.product_id', '=', 'products.id')
-                            ->join('users', 'orders.owner_id', '=', 'users.id')
-                            ->select('products.*', 'orders.*','users.*')
-                            ->where('buyer_id',$Id)
-                            ->orderBy('orders.o_id', 'desc')
-                            ->get();
+                        if(Auth::user()->role=='1'){//for admin
+                          $flights = DB::table('orders')
+                              ->join('products', 'orders.product_id', '=', 'products.id')
+                              ->join('users', 'orders.owner_id', '=', 'users.id')
+                              ->select('products.*', 'orders.*','users.*')
+                              ->orderBy('orders.o_id', 'desc')
+                              ->get();
+                        }else{
+                          $flights = DB::table('orders')
+                              ->join('products', 'orders.product_id', '=', 'products.id')
+                              ->join('users', 'orders.owner_id', '=', 'users.id')
+                              ->select('products.*', 'orders.*','users.*')
+                              ->where('buyer_id',$Id)
+							   ->whereIn('status_order', [1, 2])
+                              ->orderBy('orders.o_id', 'desc')
+                              ->get();
+                        }
+
                         ?>
                         <table class="table">
                             <thead>
                             <tr>
+                              <th scope="col">Order ID</th>
                                 <th scope="col">Product Name</th>
-                                <th scope="col">Owner Name</th>
-                                <th scope="col">Owner Address</th>
-                                <th scope="col">Owner Phone</th>
-                                <th scope="col">Taking Date</th>
+                                <th scope="col">Shared By</th>
+                                <!-- <th scope="col">Owner Address</th>
+                                <th scope="col">Owner Phone</th> -->
+                                <th scope="col">Borrowed Date</th>
                                 <th scope="col">Expire Date</th>
                                 <th scope="col">Remaining days</th>
                                 <th scope="col">Action</th>
@@ -48,10 +85,11 @@
 
                             @foreach($flights as $share)
                                 <tr>
+                                  <td>{{$share->o_id}}</td>
                                     <td>{{$share->title}}</td>
                                     <td>{{$share->name}}</td>
-                                    <td>{{$share->address}}</td>
-                                    <td>{{$share->phone}}</td>
+                                    <!-- <td>{{$share->address}}</td>
+                                    <td>{{$share->phone}}</td> -->
                                     <td>{{$share->take_date}}</td>
                                     <td>{{$share->expire_date}}</td>
                                     <td>
@@ -65,10 +103,13 @@
                                     <td>
 
                                         @if($share->status_order=='1')
-                                            <a class="btn btn-warning btn-sm" href="{{'/buyer_mark_borrow?id='.$share->o_id}}">Mark As Borrowed</a>
+                                            <a class="btn btn-warning btn-sm" href="{{'/buyer_mark_borrow?id='.$share->o_id}}">Return Product</a>
                                         @endif
                                             @if($share->status_order=='2')
                                             <a class="btn btn-success btn-sm" >Completed</a>
+                                        @endif
+										@if($share->status_order=='3')
+                                            <a class="btn btn-warning btn-sm" >Waiting for Owner confirmation</a>
                                         @endif
 
                                     </td>

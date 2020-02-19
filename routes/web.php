@@ -10,16 +10,32 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/services', function () {
+    return view('user.services');
+});
+
+Route::get('/contact', function () {
+    return view('user.contact');
+});
 
 Route::get('/', function () {
     return view('user.index');
 });
 
+Route::get('/about', function () {
+    return view('user.about');
+});
+Route::get('/report', function () {
+    return view('user.report');
+});
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
+Route::get('/edit_profile', function () {
+    return view('user.edit_profile');
+});
+Route::post('/edit_profile', 'HomeController@edit_profile')->name('edit_profile');
 //user fann_get_cascade_activation_functions
 Route::get('/product_list', function () {
     return view('user.product.product_list');
@@ -40,6 +56,11 @@ Route::get('/manage_order', function () {
 Route::get('/owner_mark_receive', function () {//give rating to buyer
     return view('user.rating.give_buyer_rating');
 });
+
+Route::get('/owner_mark_accept/{id}', 'OrderController@accept')->name('order_accept');
+Route::get('/owner_mark_reject/{id}', 'OrderController@reject')->name('order_reject');
+
+
 Route::post('/add_rating_to_buyer', 'RatingController@rate_to_buyer')->name('rate_to_buyer');
 
 

@@ -37,15 +37,32 @@ class DelayReturn extends Command
      */
     public function handle()
     {
-        //add mail testing
-        $to_name = 'Bulanzrs 2020';
-        $to_email = 'bulanzrs2020@gmail.com';
-        $data = array('name'=>"Ogbonna Vitalis(sender_name)", "body" => "A test mail");
-        \Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)
-                ->subject('Laravel Test Mail');
-            $message->from('mintomia199@gmail.com','Test Mail');
-        });
-        //end mail testing
+
+       //add logic for email
+       $today = date("Y-m-d");
+       $get_return = DB::table('orders')
+                     ->where('expire_date','<',$today)
+                     ->where('status_order','=',1)
+                     ->get();
+
+        if($get_return!=null){
+          foreach ($get_return as $get) {
+            //get the email from user table
+            $get_email = DB::table('users')->where('id','=',$get->buyer_id)->first();
+            //add mail testing
+            $to_name =$get_email->name;
+            $to_email =$get_email->email;
+            $data = array('name'=>$get_email->name, "body" =>$get->expire_date);
+            \Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
+                $message->to($to_email, $to_name)
+                    ->subject('Product Return Reminder');
+                $message->from('sm11935p@gmail.com','Product Reminder From Let-Share');
+            });
+            //end mail testing
+          }//foreach
+
+        }//if
+
+
     }
 }

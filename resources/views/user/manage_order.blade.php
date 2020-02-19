@@ -5,11 +5,35 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="/home"><i class="fas fa-arrow-left" style="margin-right: 10px"></i>Dashboard</a>
+                        <a href="/home"><button class="btn btn-warning"><i class="fa fa-arrow-left" ></i>&nbsp;Dashboard</button></a>
                         @foreach ($errors->all() as $error)
                             <li style="float:right;color:red;">{{ $error }}</li>
                         @endforeach
                     </div>
+					
+					
+<div class="search_box" style="margin-top:10px">
+<center>
+    <form action="" id="form2">
+        <div>
+            <input type="text" id="search">
+            <input class="btn btn-warning" type="button" id="submit_form" onclick="checkInput()" value="Submit">
+        </div>
+    </form>
+	</center>
+</div>
+
+<!--END SEARCH BOX -->
+<script>
+    function checkInput() {
+        var query = document.getElementById('search').value;
+        window.find(query);
+        return true;
+    }
+</script>
+
+				
+
 
                     <div class="card-body">
                         @if (session('status'))
@@ -33,11 +57,12 @@
                         <table class="table">
                             <thead>
                             <tr>
+                                <th scope="col">Order ID</th>
                                 <th scope="col">Product Name</th>
-                                <th scope="col">Buyer Name</th>
-                                <th scope="col">Buyer Address</th>
-                                <th scope="col">Buyer Phone</th>
-                                <th scope="col">Taking Date</th>
+                                <th scope="col">Borrowed By</th>
+                                <!-- <th scope="col">Buyer Address</th>
+                                <th scope="col">Buyer Phone</th> -->
+                                <th scope="col">Borrowed Date</th>
                                 <th scope="col">Expire Date</th>
                                 <th scope="col">Remaining days</th>
                                 <th scope="col">Action</th>
@@ -48,10 +73,11 @@
 
                             @foreach($flights as $share)
                                 <tr>
+                                   <td>{{$share->o_id}}</td>
                                     <td>{{$share->title}}</td>
                                     <td>{{$share->name}}</td>
-                                    <td>{{$share->address}}</td>
-                                    <td>{{$share->phone}}</td>
+                                    <!-- <td>{{$share->address}}</td>
+                                    <td>{{$share->phone}}</td> -->
                                     <td>{{$share->take_date}}</td>
                                     <td>{{$share->expire_date}}</td>
                                     <td>
@@ -63,8 +89,15 @@
                                         {{$remain}}
                                     </td>
                                     <td>
+
+                                        @if($share->status_order=='3')
+                                        <a class="btn btn-success btn-sm" href="{{'/owner_mark_accept/'.$share->o_id}}">Accept</a>
+                                        <a class="btn btn-danger btn-sm" href="{{'/owner_mark_reject/'.$share->o_id}}">Reject</a>
+                                        @endif
                                         @if($share->status_order=='1')
-                                            <a class="btn btn-warning btn-sm" href="{{'/owner_mark_receive?id='.$share->o_id}}">Mark As Received</a>
+                                            <a class="btn btn-warning btn-sm">Waiting for Return</a>
+                                            <!-- <a class="btn btn-warning btn-sm" href="{{'/owner_mark_receive?id='.$share->o_id}}">Mark As Received</a> -->
+
                                         @endif
                                         @if($share->status_order=='2')
                                             <a class="btn btn-success btn-sm">Completed</a>

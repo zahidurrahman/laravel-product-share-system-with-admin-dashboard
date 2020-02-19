@@ -3,11 +3,18 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-7">
             <div class="card" style="border: 0;">
-                <div class="card-header" style="background-color:#a8e063;border: 0;color:#2C3E50;">
-                    Dashboard
-                </div>
+                <div class="card-header">
+                        <a href="#"><button class="btn btn-warning">&nbsp;Dashboard</button></a>
+                        @foreach ($errors->all() as $error)
+                            <li style="float:right;color:red;">{{ $error }}</li>
+                        @endforeach
+                    </div>
+				
+				
+
+
 
                 <div class="card-body">
                     @if (session('status'))
@@ -41,14 +48,14 @@
                                 </a>
                             </div>
                             <div class="col">
-                                <a href="" style="text-decoration: none;">
+                                <a href="/order_list" style="text-decoration: none;">
                                     <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
                                         <div class="card-body">
                                             <center>
                                                 <h2 class="card-title">
-                                                    <img src="https://image.flaticon.com/icons/svg/327/327013.svg" style="width:50px;height:50px;">
+                                                    <img src="https://image.flaticon.com/icons/png/512/1559/1559863.png" style="width:50px;height:50px;">
                                                 </h2>
-                                                <p>View Orders</p>
+                                                <p>Orders</p>
                                             </center>
                                         </div>
                                     </div>
@@ -64,7 +71,7 @@
                                         <div class="card-body">
                                             <center>
                                                 <h2 class="card-title">
-                                                    <img src="https://image.flaticon.com/icons/svg/427/427735.svg" style="width:50px;height:50px;">
+                                                    <img src="https://image.flaticon.com/icons/png/512/1524/1524855.png" style="width:50px;height:50px;">
                                                     </h2>
                                                 <p>Manage Products</p>
                                             </center>
@@ -74,7 +81,7 @@
                                 </a>
                             </div>
                             <div class="col">
-                                <a href="" style="text-decoration: none;">
+                                <a href="/report" style="text-decoration: none;">
                                     <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
                                         <div class="card-body">
                                             <center>
@@ -101,7 +108,7 @@
                                                 <h2 class="card-title">
                                                     <img src="https://image.flaticon.com/icons/svg/427/427735.svg" style="width:50px;height:50px;">
                                                     </h2>
-                                                <p>Product List</p>
+                                                <p>Upload Products </p>
                                             </center>
 
                                         </div>
@@ -116,7 +123,7 @@
                                                 <h2 class="card-title">
                                                     <img src="https://image.flaticon.com/icons/svg/327/327013.svg" style="width:50px;height:50px;">
                                                 </h2>
-                                                <p>My Boking List</p>
+                                                <p>Borrowed Products</p>
                                             </center>
                                         </div>
                                     </div>
@@ -131,29 +138,29 @@
                                         <div class="card-body">
                                             <center>
                                                 <h2 class="card-title">
-                                                    <img src="https://image.flaticon.com/icons/svg/427/427735.svg" style="width:50px;height:50px;">
+                                                    <img src="https://image.flaticon.com/icons/png/512/1559/1559863.png" style="width:50px;height:50px;">
                                                 </h2>
-                                                <p>Manage Order</p>
+                                                <p>Shared Products </p>
                                             </center>
 
                                         </div>
                                     </div>
                                 </a>
                             </div>
-                            {{--<div class="col">--}}
-                                {{--<a href="/order_list" style="text-decoration: none;">--}}
-                                    {{--<div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">--}}
-                                        {{--<div class="card-body">--}}
-                                            {{--<center>--}}
-                                                {{--<h2 class="card-title">--}}
-                                                    {{--<img src="https://image.flaticon.com/icons/svg/327/327013.svg" style="width:50px;height:50px;">--}}
-                                                {{--</h2>--}}
-                                                {{--<p>My Boking List</p>--}}
-                                            {{--</center>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</a>--}}
-                            {{--</div>--}}
+                            <div class="col">
+                                <a href="/edit_profile" style="text-decoration: none;">
+                                    <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                                        <div class="card-body">
+                                            <center>
+                                                <h2 class="card-title">
+                                                    <img src="https://image.flaticon.com/icons/png/512/660/660611.png" style="width:50px;height:50px;">
+                                                </h2>
+                                                <p>Edit Profile</p>
+                                            </center>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                         @endif
                         @if((Auth::user()->role =='0') && (Auth::user()->status =='0'))
